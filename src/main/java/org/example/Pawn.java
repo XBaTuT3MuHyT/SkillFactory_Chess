@@ -12,7 +12,8 @@ public class Pawn extends ChessPiece {
     int isFirstMove = ((this.color == "white") && (line == 1))||((this.color == "black") && (line == 6)) ? 2 : 1;
         return (column == toColumn)&&
                 !(line == toLine)&&
-                ((toLine - line) <= (multColor * isFirstMove));
+                ((toLine - line) <= (multColor * isFirstMove))&&
+                positionInRange(toLine, toColumn);
     }
 
     @Override
