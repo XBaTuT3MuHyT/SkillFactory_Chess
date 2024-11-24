@@ -9,9 +9,32 @@ public class Bishop extends ChessPiece {
 
     @Override
     public boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
-        return (abs(line - toLine) == abs(column - toColumn))&&
-                positionChanged(line, column, toLine, toColumn)&&
-                positionInRange(toLine, toColumn);
+
+        if (abs(line - toLine) != abs(column - toColumn)) {
+            return false; // Не на одной диагонали
+        }
+
+        int xDirection = toColumn > column ? 1 : -1; // Определяем направление по X
+        int yDirection = toLine > line ? 1 : -1; // Определяем направление по Y
+
+        int x = column + xDirection;
+        int y = line + yDirection;
+
+        // Проверяем клетки на пути
+        while (x != toColumn - xDirection && y != toLine - yDirection) {
+            if (chessBoard.board[x][y] != null) { // Если клетка занята
+                return false;
+            }
+            x += xDirection;
+            y += yDirection;
+        }
+
+        if (chessBoard.board[toLine][toColumn].color.equals(this.color)){
+            return false;
+        }
+
+        return true;
+
     }
 
     @Override

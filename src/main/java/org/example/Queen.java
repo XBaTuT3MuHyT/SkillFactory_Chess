@@ -9,9 +9,56 @@ public class Queen extends ChessPiece{
 
     @Override
     public boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
-        return ((abs(line - toLine) == abs(column - toColumn))||((line == toLine)||(column == toColumn)))&&
-                positionInRange(toLine, toColumn)&&
-                positionChanged(line, column, toLine, toColumn) ;
+        if (((line != toLine)&&(column != toColumn)) || (abs(line - toLine) != abs(column - toColumn))) {
+            return false;
+        }
+        if (((line == toLine)||(column == toColumn))){
+            if (line == toLine) {
+                int xDirection = toColumn > column ? 1 : -1; // Определяем направление по X
+                int x = column + xDirection;
+
+                while (x != toColumn - xDirection) {
+                    if (chessBoard.board[x][line] != null) { // Если клетка занята
+                        return false;
+                    }
+                    x += xDirection;
+                }
+            }
+            if (column == toColumn) {
+                int yDirection = toLine > line ? 1 : -1; // Определяем направление по Y
+                int y = line + yDirection;
+                while (y != toLine - yDirection) {
+                    if (chessBoard.board[y][column] != null) { // Если клетка занята
+                        return false;
+                    }
+                    y += yDirection;
+                }
+            }
+        }
+
+        if (abs(line - toLine) == abs(column - toColumn)){
+            int xDirection = toColumn > column ? 1 : -1; // Определяем направление по X
+            int yDirection = toLine > line ? 1 : -1; // Определяем направление по Y
+
+            int x = column + xDirection;
+            int y = line + yDirection;
+
+            // Проверяем клетки на пути
+            while (x != toColumn - xDirection && y != toLine - yDirection) {
+                if (chessBoard.board[x][y] != null) { // Если клетка занята
+                    return false;
+                }
+                x += xDirection;
+                y += yDirection;
+            }
+        }
+
+        if (chessBoard.board[toLine][toColumn].color.equals(this.color)){
+            return false;
+        }
+
+        return true;
+
     }
 
     @Override
