@@ -6,7 +6,7 @@ abstract public class ChessPiece {
         this.color = color;
     }
     String color;
-    boolean check;
+    boolean check = true;
 
     public String getColor(){
         return color;
