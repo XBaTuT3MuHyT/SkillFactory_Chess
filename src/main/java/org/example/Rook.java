@@ -15,7 +15,7 @@ public class Rook extends ChessPiece{
             int xDirection = toColumn > column ? 1 : -1; // Определяем направление по X
             int x = column + xDirection;
 
-            while (x != toColumn - xDirection) {
+            while (x != toColumn) {
                 if (chessBoard.board[x][line] != null) { // Если клетка занята
                     return false;
                 }
@@ -25,7 +25,7 @@ public class Rook extends ChessPiece{
         if (column == toColumn) {
             int yDirection = toLine > line ? 1 : -1; // Определяем направление по Y
             int y = line + yDirection;
-            while (y != toLine - yDirection) {
+            while (y != toLine) {
                 if (chessBoard.board[y][column] != null) { // Если клетка занята
                     return false;
                 }
@@ -33,7 +33,7 @@ public class Rook extends ChessPiece{
             }
         }
 
-        if (chessBoard.board[toLine][toColumn].color.equals(this.color)){
+        if ((chessBoard.board[toLine][toColumn] != null) && (chessBoard.board[toLine][toColumn].color.equals(this.color))){
             return false;
         }
 

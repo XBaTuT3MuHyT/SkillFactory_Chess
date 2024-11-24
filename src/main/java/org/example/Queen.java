@@ -9,7 +9,7 @@ public class Queen extends ChessPiece{
 
     @Override
     public boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
-        if (((line != toLine)&&(column != toColumn)) || (abs(line - toLine) != abs(column - toColumn))) {
+        if (((line != toLine)&&(column != toColumn)) && (abs(line - toLine) != abs(column - toColumn))) {
             return false;
         }
         if (((line == toLine)||(column == toColumn))){
@@ -17,7 +17,7 @@ public class Queen extends ChessPiece{
                 int xDirection = toColumn > column ? 1 : -1; // Определяем направление по X
                 int x = column + xDirection;
 
-                while (x != toColumn - xDirection) {
+                while (x != toColumn ) {
                     if (chessBoard.board[x][line] != null) { // Если клетка занята
                         return false;
                     }
@@ -27,7 +27,7 @@ public class Queen extends ChessPiece{
             if (column == toColumn) {
                 int yDirection = toLine > line ? 1 : -1; // Определяем направление по Y
                 int y = line + yDirection;
-                while (y != toLine - yDirection) {
+                while (y != toLine ) {
                     if (chessBoard.board[y][column] != null) { // Если клетка занята
                         return false;
                     }
@@ -44,7 +44,7 @@ public class Queen extends ChessPiece{
             int y = line + yDirection;
 
             // Проверяем клетки на пути
-            while (x != toColumn - xDirection && y != toLine - yDirection) {
+            while (x != toColumn  && y != toLine) {
                 if (chessBoard.board[x][y] != null) { // Если клетка занята
                     return false;
                 }
@@ -53,7 +53,7 @@ public class Queen extends ChessPiece{
             }
         }
 
-        if (chessBoard.board[toLine][toColumn].color.equals(this.color)){
+        if ((chessBoard.board[toLine][toColumn] != null) && (chessBoard.board[toLine][toColumn].color.equals(this.color))){
             return false;
         }
 

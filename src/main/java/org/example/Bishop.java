@@ -21,18 +21,17 @@ public class Bishop extends ChessPiece {
         int y = line + yDirection;
 
         // Проверяем клетки на пути
-        while (x != toColumn - xDirection && y != toLine - yDirection) {
-            if (chessBoard.board[x][y] != null) { // Если клетка занята
+        while (x != toColumn  && y != toLine ) {
+            if (chessBoard.board[x][y] != null){// Если клетка занята
                 return false;
             }
             x += xDirection;
             y += yDirection;
         }
 
-        if (chessBoard.board[toLine][toColumn].color.equals(this.color)){
+        if ((chessBoard.board[toLine][toColumn] != null) && (chessBoard.board[toLine][toColumn].color.equals(this.color))){
             return false;
         }
-
         return true;
 
     }

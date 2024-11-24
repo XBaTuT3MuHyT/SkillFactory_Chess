@@ -10,7 +10,7 @@ public class King extends ChessPiece{
     @Override
     public boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
 
-        if (chessBoard.board[toLine][toColumn].color.equals(this.color)){
+        if ((chessBoard.board[toLine][toColumn] != null) && (chessBoard.board[toLine][toColumn].color.equals(this.color))){
             return false;
         }
         return (((abs(line - toLine)) == 1) || (abs(column - toColumn) == 1)) &&

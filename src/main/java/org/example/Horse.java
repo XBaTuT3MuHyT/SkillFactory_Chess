@@ -12,7 +12,7 @@ public class Horse extends ChessPiece{
         return (((abs(column - toColumn) == 2) && (abs(line - toLine) == 1)) ||
                 ((abs(column - toColumn) == 1) && (abs(line - toLine) == 2))) &&
                 positionInRange(toLine, toColumn) &&
-                chessBoard.board[toLine][toColumn].color != this.color;
+                ((chessBoard.board[toLine][toColumn] != null) && (chessBoard.board[toLine][toColumn].color.equals(this.color)));
     }
 
     @Override
